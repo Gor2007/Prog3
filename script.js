@@ -5,6 +5,7 @@ let grassEaterArr = []
 let msakerArr = []
 let amenakerArr = []
 let bombArr = []
+let shatakerArr = []
 /*function generate(matLen, gr, grEat, msaker, amenaker) {
     for (let i = 0; i < matLen; i++) {
         matrix[i] = []
@@ -134,6 +135,38 @@ function addBomb(){
         bombArr.push(gr)
     }
 }
+function addShataker(){
+    let x = Math.floor(Math.random() * 40)
+    let y = Math.floor(Math.random() * 40)
+    if(matrix[y][x] == 1){
+        matrix[y][x] = 6
+        let gr = new Shataker(x,y)
+        shatakerArr.push(gr)
+    }
+    else if(matrix[y][x] == 2){
+        matrix[y][x] = 6
+        let gr = new Shataker(x,y)
+        amenakerArr.push(gr)
+    }
+    else if(matrix[y][x] == 3){
+        matrix[y][x] = 6
+        let gr = new Shataker(x,y)
+        amenakerArr.push(gr)
+    }
+    else if(matrix[y][x] == 4){
+        matrix[y][x] = 6
+        let gr = new Shataker(x,y)
+        amenakerArr.push(gr)
+    }
+    else if(matrix[y][x] == 5){
+        matrix[y][x] = 6
+        let gr = new Shataker(x,y)
+        amenakerArr.push(gr)
+    }
+    else{
+        addShataker()
+    }
+}
 //generate(55, 400, 85, 20, 7)
 
 function setup() {
@@ -162,6 +195,10 @@ function setup() {
                 let gr = new Bomb(x,y)
                 bombArr.push(gr)
             }
+            else if (matrix[y][x] == 6){
+                let gr = new Shataker(x,y)
+                shatakerArr.push(gr)
+            }
         }
     }
 }
@@ -186,6 +223,9 @@ function draw() {
             else if (matrix[y][x] == 5){
                 fill("black")
             }
+            else if (matrix[y][x] == 6){
+                fill("black")
+            }
             rect(x * side, y * side, side, side);
         }
     }
@@ -203,5 +243,8 @@ function draw() {
     }
     for(let i in bombArr){
         bombArr[i].boom()
+    }
+    for(let i in shatakerArr){
+        shatakerArr[i].eat()
     }
 } 

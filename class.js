@@ -429,5 +429,156 @@ class Bomb {
                 }
             }
         }
-    }
-}
+        }}class Shataker {
+            constructor(x, y) {
+                this.x = x
+                this.y = y
+                this.energy = 1
+                this.directions = []
+            }
+            getNewCoordinates() {
+                this.directions = [
+                    [this.x - 1, this.y - 1],
+                    [this.x, this.y - 1],
+                    [this.x + 1, this.y - 1],
+                    [this.x - 1, this.y],
+                    [this.x + 1, this.y],
+                    [this.x - 1, this.y + 1],
+                    [this.x, this.y + 1],
+                    [this.x + 1, this.y + 1]
+                ];
+            }
+            search(char) {
+                this.getNewCoordinates()
+                let found = []
+                for (let i in this.directions) {
+                    let x = this.directions[i][0]
+                    let y = this.directions[i][1]
+                    if (x >= 0 && x < matrix.length && y >= 0 && y < matrix.length) {
+                        if (matrix[y][x] == char) {
+                            found.push(this.directions[i])
+                        }
+                    }
+        
+                } return found;
+            }
+            eat() {
+                let found = this.search(1)
+                let foundRand = random(found)
+                let found1 = this.search(2)
+                let foundRand1 = random(found1)
+                let found2 = this.search(3)
+                let foundRand2 = random(found2)
+                let found3 = this.search(4)
+                let foundRand3 = random(found3)
+                let found4 = this.search(5)
+                let foundRand4 = random(found4)
+                this.energy++
+                if (foundRand) {
+                    let x = foundRand[0]
+                    let y = foundRand[1]
+                    matrix[y][x] = 6
+                    matrix[this.y][this.x] = 0
+                    this.x = x
+                    this.y = y
+                    for (let i in grassArr) {
+                        if (x == grassArr[i].x && y == grassArr[i].y) {
+                            grassArr.splice(i, 1)
+                            break;
+                        }
+                    }
+                    
+                } else if (foundRand1) {
+                    let x = foundRand1[0]
+                    let y = foundRand1[1]
+                    matrix[y][x] = 6
+                    matrix[this.y][this.x] = 0
+                    this.y = y
+                    this.x = x
+                    for (let i in grassEaterArr) {
+                        if (x == grassEaterArr[i].x && y == grassEaterArr[i].y) {
+                            grassEaterArr.splice(i, 1)
+                            break;
+                        }
+                    }
+                    
+                } else if (foundRand2) {
+                    let x = foundRand2[0]
+                    let y = foundRand2[1]
+                    matrix[y][x] = 6
+                    matrix[this.y][this.x] = 0
+                    this.y = y
+                    this.x = x
+                    for (let i in msakerArr) {
+                        if (x == msakerArr[i].x && y == msakerArr[i].y) {
+                            msakerArr.splice(i, 1)
+                            break;
+                        }
+                    }
+                }
+                    
+                    else if (foundRand3) {
+                        let x = foundRand3[0]
+                        let y = foundRand3[1]
+                        matrix[y][x] = 6
+                        matrix[this.y][this.x] = 0
+                        this.y = y
+                        this.x = x
+                        for (let i in amenakerArr) {
+                            if (x == amenakerArr[i].x && y == amenakerArr[i].y) {
+                                amenakerArr.splice(i, 1)
+                                break;
+                            }
+                        }
+                    }
+                        
+                        else if (foundRand4) {
+                            let x = foundRand4[0]
+                            let y = foundRand4[1]
+                            matrix[y][x] = 6
+                            matrix[this.y][this.x] = 0
+                            this.y = y
+                            this.x = x
+                            for (let i in bombArr) {
+                                if (x == bombArr[i].x && y == bombArr[i].y) {
+                                    bombArr.splice(i, 1)
+                                    break;
+                                }
+                            }
+                            
+                } else {
+                    this.move()
+                }
+            }
+            
+            
+           move() {
+                this.energy -= 1.7
+                let found = this.search(0)
+                let foundRand = random(found)
+                if (this.energy > 0 && foundRand) {
+                    let x = foundRand[0]
+                    let y = foundRand[1]
+                    matrix[y][x] = 6
+                    matrix[this.y][this.x] = 0
+                    this.x = x
+                    this.y = y
+                }
+                else {
+                    this.die()
+                }
+            } die() {
+                matrix[this.y][this.x] = 0
+                for (let i in shatakerArr) {
+                    if (this.x == shatakerArr[i].x && this.y == shatakerArr[i].y) {
+                        shatakerArr.splice(i, 1)
+                        break;
+                    }
+                }
+            }
+        }
+            
+            
+    
+    
+        
